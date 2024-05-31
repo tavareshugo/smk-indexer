@@ -1,0 +1,17 @@
+
+#### GENERAL #####
+
+# input genome CSV file
+input: "config/genomes.csv"
+
+# output directory - needs to exist
+outdir: "genomes/"
+
+
+#### RESOURCES ####
+
+# useful on HPC clusters
+max-memory: "500G"       # use K, M or G as a suffix
+max-time: "12:00:00"     # HH:MM:SS
+max-cpus: "56"
+memory-per-cpu: "6G"     # use K, M or G as a suffix
