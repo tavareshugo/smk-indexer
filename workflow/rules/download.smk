@@ -18,12 +18,12 @@ rule download:
         gff=$(grep "$genome" {input} | cut -d, -f4)
 
         # download
-        wget -O {wildcards.genomedir}/genome.fa.gz $genome
-        wget -O {wildcards.genomedir}/annotation.gtf.gz $gtf
-        wget -O {wildcards.genomedir}/annotation.gff3.gz $gff
+        wget -O {wildcards.genomedir}/genome.fa.gz $genome > {log} 2>&1
+        wget -O {wildcards.genomedir}/annotation.gtf.gz $gtf > {log} 2>&1
+        wget -O {wildcards.genomedir}/annotation.gff3.gz $gff > {log} 2>&1
 
-        # uncompress them all (we re-compress at the end)
-        gunzip {wildcards.genomedir}/genome.fa.gz
-        gunzip {wildcards.genomedir}/annotation.gtf.gz
-        gunzip {wildcards.genomedir}/annotation.gff3.gz
+        # uncompress them all (we re-compress at the end with samtools bgzip)
+        gunzip {wildcards.genomedir}/genome.fa.gz > {log} 2>&1
+        gunzip {wildcards.genomedir}/annotation.gtf.gz > {log} 2>&1
+        gunzip {wildcards.genomedir}/annotation.gff3.gz > {log} 2>&1
         """
