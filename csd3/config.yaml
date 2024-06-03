@@ -1,0 +1,53 @@
+# see https://snakemake.github.io/snakemake-plugin-catalog/plugins/executor/slurm.html
+
+# CSD3 default resources (comment/uncomment as preferred)
+default-resources:
+    slurm_account: helariutta-sl2-cpu
+    # slurm_partition: icelake
+    # mem_per_cpu: 3370
+    slurm_partition: sapphire
+    mem_per_cpu: 4580
+
+# container settings
+use-singularity: True
+use-conda: True
+
+# SLURM execution
+executor: slurm
+jobs: 100                        # restrict number of submitted jobs to 100
+max-jobs-per-second: 1           # don't abuse SLURM
+max-status-checks-per-second: 1  # don't abuse SLURM
+keep-going: True                 # if a job fails, continue the pipeline for other jobs
+rerun-incomplete: True
+printshellcmds: True             # print shell commands that are run
+latency-wait: 20
+
+# resources for each rule
+set-resources:
+    download:
+        runtime: 180 # in minutes
+        cpus_per_task: 4
+    samtools_index:
+        runtime: 360
+        cpus_per_task: 12
+    gffread:
+        runtime: 360
+        cpus_per_task: 12
+    bwa_index:
+        runtime: 360
+        cpus_per_task: 12
+    bowtie2_build:
+        runtime: 360
+        cpus_per_task: 12
+    star_index:
+        runtime: 360
+        cpus_per_task: 24
+    salmon_decoy:
+        runtime: 360
+        cpus_per_task: 4
+    salmon_index:
+        runtime: 360
+        cpus_per_task: 12
+    compress:
+        runtime: 360
+        cpus_per_task: 6
