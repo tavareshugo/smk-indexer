@@ -1,9 +1,9 @@
 rule bowtie2_build:
     input:
-        ref="genome.fasta",
+        ref="{genomedir}/genome.fa",
     output:
         multiext(
-            "genome",
+            "{genomedir}/bowtie2/genome",
             ".1.bt2",
             ".2.bt2",
             ".3.bt2",
@@ -12,32 +12,9 @@ rule bowtie2_build:
             ".rev.2.bt2",
         ),
     log:
-        "logs/bowtie2_build/build.log",
+        "logs/{genomedir}/bowtie2_build.log",
     params:
         extra="",  # optional parameters
-    threads: 8
-    wrapper:
-        "v3.10.2/bio/bowtie2/build"
-
-
-
-rule bowtie2_build_large:
-    input:
-        ref="genome.fasta",
-    output:
-        multiext(
-            "genome",
-            ".1.bt2l",
-            ".2.bt2l",
-            ".3.bt2l",
-            ".4.bt2l",
-            ".rev.1.bt2l",
-            ".rev.2.bt2l",
-        ),
-    log:
-        "logs/bowtie2_build/build.log",
-    params:
-        extra="--large-index",  # optional parameters
     threads: 8
     wrapper:
         "v3.10.2/bio/bowtie2/build"

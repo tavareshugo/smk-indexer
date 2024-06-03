@@ -1,11 +1,12 @@
 rule bwa_index:
     input:
-        "{genome}.fasta",
+        "{genomedir}/genome.fa",
     output:
-        idx=multiext("{genome}.{alg}", ".amb", ".ann", ".bwt", ".pac", ".sa"),
+        idx=multiext("{genomedir}/bwa/genome", ".amb", ".ann", ".bwt", ".pac", ".sa"),
     log:
-        "logs/bwa_index/{genome}.{alg}.log",
+        "logs/{genomedir}/bwa_index.log",
+    threads: 1
     params:
-        extra=lambda w: f"-a {w.alg}",
+        extra="",
     wrapper:
         "v3.10.2/bio/bwa/index"

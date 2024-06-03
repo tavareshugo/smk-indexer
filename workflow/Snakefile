@@ -3,20 +3,24 @@
 # https://snakemake.readthedocs.io/en/stable/snakefiles/best_practices.html,
 # in particular regarding the standardized folder structure mentioned there. 
 
-configfile: "config/config.yaml"
+localrules: download
+
+configfile: "config/options.yaml"
 
 report: "report/workflow.rst"
 
-container: "docker://continuumio/miniconda3"
+# singularity: "docker://continuumio/miniconda3"
+singularity: "docker://condaforge/mambaforge"
 
 include: "rules/common.smk"
-include: "rules/prep_files.smk"
-include: "rules/gffread.smk"
+include: "rules/download.smk"
 include: "rules/samtools.smk"
+include: "rules/gffread.smk"
 include: "rules/bwa.smk"
 include: "rules/bowtie2.smk"
-include: "rules/salmon.smk"
 include: "rules/star.smk"
+include: "rules/salmon.smk"
+include: "rules/compress.smk"
 
 rule all:
     input: final_outputs # defined in common.smk

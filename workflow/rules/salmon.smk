@@ -1,10 +1,10 @@
 rule salmon_decoy:
     input:
-        transcriptome="{genomedir}/transcripts.fa.gz",
-        genome="{genomedir}/genome.fa.gz",
+        transcriptome="{genomedir}/transcripts.fa",
+        genome="{genomedir}/genome.fa",
     output:
-        gentrome="gentrome.fa.gz",
-        decoys="decoys.txt",
+        gentrome=temp("{genomedir}/salmon/gentrome.fa"),
+        decoys=temp("{genomedir}/salmon/decoys.txt"),
     threads: 2
     log:
         "logs/{genomedir}/salmon_decoy.log"
@@ -13,10 +13,10 @@ rule salmon_decoy:
 
 rule salmon_index:
     input:
-        sequences="{genomedir}/transcripts.fa.gz",
+        sequences="{genomedir}/transcripts.fa",
     output:
         multiext(
-            "salmon/transcriptome_index/",
+            "{genomedir}/salmon/",
             "complete_ref_lens.bin",
             "ctable.bin",
             "ctg_offsets.bin",

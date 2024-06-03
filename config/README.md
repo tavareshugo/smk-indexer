@@ -34,11 +34,15 @@ The `config.yml` can be used to configure some of the workflow options, namely t
 The workflow can be run with the following command:
 
 ```bash
-snakemake --use-conda --slurm --default-resources slurm_account=<YOUR SLURM ACCOUNT> slurm_partition=<YOUR SLURM PARTITION>
+snakemake --workflow-profile config --default-resources slurm_account=<YOUR ACCOUNT IN LOWERCASE> slurm_partition=<PARTITION>
+
+# alternative so we don't need to specify the directory in the config
+snakemake --workflow-profile config --singularity-args "--bind $PWD" --default-resources slurm_account=<YOUR ACCOUNT IN LOWERCASE> slurm_partition=<PARTITION>
 ```
 
-On Cambridge CSD3 we recommend running this from a `tmux`/`screen` session.
-Snakemake should then submit jobs to SLURM automatically.
+- The `--workflow-profile config` option makes snakemake look at the `config/config.yaml` file and takes resource specification from there. This is set to use SLURM and sets default resources for each rule of the workflow.
+  - An important option to configure is the **bind directory** for the singularity image used.
+- On Cambridge CSD3 we recommend running this from a `tmux`/`screen` session on a login node. Snakemake should then submit jobs to SLURM automatically.
 
 For a **dry-run** (i.e. indicate which steps would be run without actually doing anything) do:
 

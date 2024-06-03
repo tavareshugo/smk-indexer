@@ -1,10 +1,8 @@
 rule star_index:
     input:
-        fasta="{genomedir}/genome.fa.gz",
+        fasta="{genomedir}/genome.fa",
     output:
         directory("{genomedir}/star"),
-    message:
-        "Testing STAR index"
     threads: 1
     params:
         extra="",
