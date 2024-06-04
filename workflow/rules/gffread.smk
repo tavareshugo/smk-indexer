@@ -2,6 +2,7 @@ rule gffread:
     input:
         fasta="{genomedir}/genome.fa",
         annotation="{genomedir}/annotation.gtf",
+        faidx="{genomedir}/genome.fa.fai",
         # ids="",  # Optional path to records to keep
         # nids="",  # Optional path to records to drop
         # seq_info="",  # Optional path to sequence information

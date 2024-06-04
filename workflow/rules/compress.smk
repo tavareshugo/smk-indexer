@@ -16,8 +16,8 @@ rule compress:
     shell:
         """
         # compress with bgzip for samtools compatibility
-        bgzip -c {input.genome} > {output.genome}
-        bgzip -c {input.gff} > {output.genome}
-        bgzip -c {input.gtf} > {output.genome}
-        bgzip -c {input.transcripts} > {output.genome}
+        bgzip -c {input.genome} > {output.genome} 2> {log}
+        bgzip -c {input.gff} > {output.gff} 2> {log}
+        bgzip -c {input.gtf} > {output.gtf} 2> {log}
+        bgzip -c {input.transcripts} > {output.transcripts} 2> {log}
         """
