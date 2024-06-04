@@ -2,11 +2,11 @@
 
 # CSD3 default resources (comment/uncomment as preferred)
 default-resources:
-    slurm_account: helariutta-sl2-cpu
+    slurm_account: a-downie-sl3-cpu
     # slurm_partition: icelake
-    # mem_per_cpu: 3370
+    # mem_mb_per_cpu: 3370
     slurm_partition: sapphire
-    mem_per_cpu: 4580
+    mem_mb_per_cpu: 4580
 
 # container settings
 use-singularity: True
@@ -29,25 +29,25 @@ set-resources:
         cpus_per_task: 4
     samtools_index:
         runtime: 360
-        cpus_per_task: 12
+        cpus_per_task: 24
     gffread:
         runtime: 360
-        cpus_per_task: 12
+        cpus_per_task: 24
     bwa_index:
         runtime: 360
-        cpus_per_task: 12
+        cpus_per_task: 24
     bowtie2_build:
         runtime: 360
-        cpus_per_task: 12
+        cpus_per_task: 24
     star_index:
         runtime: 360
-        cpus_per_task: 24
+        cpus_per_task: 48
     salmon_decoy:
         runtime: 360
         cpus_per_task: 4
     salmon_index:
         runtime: 360
-        cpus_per_task: 12
+        cpus_per_task: 24
     compress:
         runtime: 360
-        cpus_per_task: 6
+        cpus_per_task: 12
