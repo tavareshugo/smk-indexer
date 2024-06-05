@@ -75,7 +75,6 @@ And the following directories, containing index files for the respective softwar
 - `bowtie2`
 - `bwa`
 - `bwa-mem2`
-- `bwa-meme`
 - `hisat2`
 - `salmon`
 - `star`
