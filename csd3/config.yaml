@@ -24,9 +24,6 @@ latency-wait: 20
 
 # resources for each rule
 set-resources:
-    download:
-        runtime: 180 # in minutes
-        cpus_per_task: 4
     samtools_index:
         runtime: 360
         cpus_per_task: 24
@@ -48,6 +45,12 @@ set-resources:
     salmon_index:
         runtime: 360
         cpus_per_task: 24
-    compress:
+    hisat2_index:
         runtime: 360
-        cpus_per_task: 12
+        cpus_per_task: 24
+    bwa_mem2_index:
+        runtime: 360
+        cpus_per_task: 24
+    bwa_meme_index:
+        runtime: 360
+        cpus_per_task: 24

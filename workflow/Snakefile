@@ -3,7 +3,7 @@
 # https://snakemake.readthedocs.io/en/stable/snakefiles/best_practices.html,
 # in particular regarding the standardized folder structure mentioned there. 
 
-localrules: download
+localrules: all, download, uncompress
 
 configfile: "config/options.yaml"
 
@@ -20,7 +20,8 @@ include: "rules/bwa.smk"
 include: "rules/bowtie2.smk"
 include: "rules/star.smk"
 include: "rules/salmon.smk"
-include: "rules/compress.smk"
+include: "rules/hisat2.smk"
+include: "rules/uncompress.smk"
 
 rule all:
     input: final_outputs # defined in common.smk
