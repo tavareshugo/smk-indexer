@@ -1,6 +1,6 @@
 rule bowtie2_build:
     input:
-        ref="{genomedir}/genome.fa",
+        ref="{genomedir}/genome.fa.gz",
     output:
         multiext(
             "{genomedir}/bowtie2/genome",
@@ -12,9 +12,9 @@ rule bowtie2_build:
             ".rev.2.bt2",
         ),
     log:
-        "logs/{genomedir}/bowtie2_build.log",
+        "{genomedir}/logs/bowtie2_build.log",
     params:
         extra="",  # optional parameters
-    threads: 8
+    threads: 24
     wrapper:
         "v3.10.2/bio/bowtie2/build"

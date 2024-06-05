@@ -1,19 +1,21 @@
 rule salmon_decoy:
     input:
-        transcriptome="{genomedir}/transcripts.fa",
-        genome="{genomedir}/genome.fa",
+        transcriptome="{genomedir}/transcripts.fa.gz",
+        genome="{genomedir}/genome.fa.gz",
     output:
-        gentrome=temp("{genomedir}/salmon/gentrome.fa"),
-        decoys=temp("{genomedir}/salmon/decoys.txt"),
+        gentrome="{genomedir}/salmon/gentrome.fa.gz",
+        decoys="{genomedir}/salmon/decoys.txt",
+    group: "salmon"
     threads: 2
     log:
-        "logs/{genomedir}/salmon_decoy.log"
+        "{genomedir}/logs/salmon_decoy.log"
     wrapper:
         "v3.10.2/bio/salmon/decoys"
 
 rule salmon_index:
     input:
-        sequences="{genomedir}/transcripts.fa",
+        sequences="{genomedir}/salmon/gentrome.fa.gz",
+        decoys="{genomedir}/salmon/decoys.txt"
     output:
         multiext(
             "{genomedir}/salmon/",
@@ -34,8 +36,8 @@ rule salmon_index:
             "versionInfo.json",
         ),
     log:
-        "logs/{genomedir}/salmon_index.log",
-    threads: 2
+        "{genomedir}/logs/salmon_index.log",
+    threads: 24
     params:
         # optional parameters
         extra="",

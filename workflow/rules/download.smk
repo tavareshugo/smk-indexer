@@ -1,29 +1,27 @@
 rule download:
-    input:
-        config["input"]
     output:
-        genome=temp("{genomedir}/genome.fa"),
-        gff=temp("{genomedir}/annotation.gff3"),
-        gtf=temp("{genomedir}/annotation.gtf"),
+        genome="{outdir}/{genome}/genome.fa.gz",
+        gff="{outdir}/{genome}/annotation.gff3.gz",
+        gtf="{outdir}/{genome}/annotation.gtf.gz",
     log:
-        "logs/{genomedir}/download.log",
+        "{outdir}/{genome}/logs/download.log",
+    conda:
+        "../envs/samtools.yaml"
     shell:
         """
-        # basename matches the name in CSV file
-        genome=$(basename {wildcards.genomedir})
+        mkdir -p {wildcards.outdir}/{wildcards.genome}
 
         # fetch URLs
-        genome=$(grep "$genome" {input} | cut -d, -f2)
-        gtf=$(grep "$genome" {input} | cut -d, -f3)
-        gff=$(grep "$genome" {input} | cut -d, -f4)
+        genome=$(grep "{wildcards.genome}" {config[input]} | cut -d, -f2)
+        gtf=$(grep "{wildcards.genome}" {config[input]} | cut -d, -f3)
+        gff=$(grep "{wildcards.genome}" {config[input]} | cut -d, -f4)
 
-        # download
-        wget -O {wildcards.genomedir}/genome.fa.gz $genome > {log} 2>&1
-        wget -O {wildcards.genomedir}/annotation.gtf.gz $gtf > {log} 2>&1
-        wget -O {wildcards.genomedir}/annotation.gff3.gz $gff > {log} 2>&1
+        # download genome and recompress with samtools bgzip
+        wget -O {wildcards.outdir}/{wildcards.genome}/genome.fa.gz $genome > {log} 2>&1
+        gunzip {wildcards.outdir}/{wildcards.genome}/genome.fa.gz 2>> {log}
+        bgzip {wildcards.outdir}/{wildcards.genome}/genome.fa 2>> {log}
 
-        # uncompress them all (we re-compress at the end with samtools bgzip)
-        gunzip {wildcards.genomedir}/genome.fa.gz > {log} 2>&1
-        gunzip {wildcards.genomedir}/annotation.gtf.gz > {log} 2>&1
-        gunzip {wildcards.genomedir}/annotation.gff3.gz > {log} 2>&1
+        # download annotations
+        wget -O {wildcards.outdir}/{wildcards.genome}/annotation.gtf.gz $gtf >> {log} 2>&1
+        wget -O {wildcards.outdir}/{wildcards.genome}/annotation.gff3.gz $gff >> {log} 2>&1
         """

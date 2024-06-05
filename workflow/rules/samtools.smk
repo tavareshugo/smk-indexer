@@ -1,12 +1,12 @@
 rule samtools_index:
     input:
-        "{genomedir}/genome.fa",
+        "{genomedir}/genome.fa.gz",
     output:
         "{genomedir}/genome.fa.fai",
     log:
-        "logs/{genomedir}/samtools.log",
+        "{genomedir}/logs/samtools.log",
     params:
         extra="",  # optional params string
-    threads: 12
+    threads: 24
     wrapper:
         "v3.10.2/bio/samtools/faidx"

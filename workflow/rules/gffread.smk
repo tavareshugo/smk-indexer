@@ -1,21 +1,30 @@
 rule gffread:
     input:
-        fasta="{genomedir}/genome.fa",
-        annotation="{genomedir}/annotation.gtf",
-        faidx="{genomedir}/genome.fa.fai",
-        # ids="",  # Optional path to records to keep
-        # nids="",  # Optional path to records to drop
-        # seq_info="",  # Optional path to sequence information
-        # sort_by="",  # Optional path to the ordered list of reference sequences
-        # attr="",  # Optional annotation attributes to keep.
-        # chr_replace="",  # Optional path to <original_ref_ID> <new_ref_ID>
+        # we use uncompressed files - see uncompress.smk
+        fasta="{genomedir}/tmp-gffread-genome.fa",
+        annotation="{genomedir}/tmp-gffread-annotation.gtf",
     output:
-        records="{genomedir}/transcripts.fa",
-        # dupinfo="",  # Optional path to clustering/merging information
-    threads: 1
+        records=temp("{genomedir}/transcripts.fa"),
+    group: "gffread"
     log:
-        "logs/{genomedir}/gffread.log",
+        "{genomedir}/logs/gffread.log",
     params:
         extra="",
     wrapper:
         "v3.10.2/bio/gffread"
+
+rule compress_transcripts:
+    input:
+        transcripts="{genomedir}/transcripts.fa"
+    output:
+        transcripts="{genomedir}/transcripts.fa.gz"
+    group: "gffread"
+    log:
+        "{genomedir}/logs/compress.log",
+    conda:
+        "../envs/samtools.yaml"
+    shell:
+        """
+        # compress with bgzip for samtools compatibility
+        bgzip -c {input.transcripts} > {output.transcripts} 2> {log}
+        """
