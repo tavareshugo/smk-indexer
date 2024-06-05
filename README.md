@@ -5,6 +5,7 @@
 A Snakemake workflow for generating genome index files for several commonly-used software. 
 See workflow [config README](config/README.md) for details of how to run and configure the workflow.
 
+![](rulegraph.png)
 
 ## Setup
 
