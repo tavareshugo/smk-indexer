@@ -1,16 +1,9 @@
-# Snakemake workflow: `smk-indexder`
+# Snakemake workflow: `smk-indexer`
 
-[![Snakemake](https://img.shields.io/badge/snakemake-≥6.3.0-brightgreen.svg)](https://snakemake.github.io)
-[![GitHub actions status](https://github.com/tavareshugo/smk-indexer/workflows/Tests/badge.svg?branch=main)](https://github.com/tavareshugo/smk-indexer/actions?query=branch%3Amain+workflow%3ATests)
+[![Snakemake](https://img.shields.io/badge/snakemake-≥8.12.0-brightgreen.svg)](https://snakemake.github.io)
 
-
-A Snakemake workflow for generating index files for the following:
-
-- `samtools`
-- `bwa`
-- `bowtie2`
-- `salmon`
-- `STAR`
+A Snakemake workflow for generating genome index files for several commonly-used software. 
+See workflow [config README](config/README.md) for details of how to run and configure the workflow.
 
 
 ## Setup
@@ -18,12 +11,5 @@ A Snakemake workflow for generating index files for the following:
 Install Snakemake using Mamba:
 
 ```bash
-mamba create -n snakemake snakemake==8.11.3
+mamba create -n snakemake bioconda::snakemake==8.12.0 bioconda::snakemake-executor-plugin-slurm=0.5.1
 ```
-
-
-## Usage
-
-The usage of this workflow is described in the [Snakemake Workflow Catalog](https://snakemake.github.io/snakemake-workflow-catalog/?usage=tavareshugo%2Fsmk-indexer).
-
-If you use this workflow in a paper, don't forget to give credits to the authors by citing the URL of this (original) smk-indexersitory and its DOI (see above).

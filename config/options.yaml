@@ -4,4 +4,4 @@
 input: "config/genomes.csv"
 
 # output directory - needs to exist
-outdir: "genomes/"
+outdir: "results/"

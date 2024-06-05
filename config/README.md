@@ -1,3 +1,5 @@
+# Workflow configuration: `smk-indexer`
+
 ## Genome sheet
 
 The main input is a CSV file specifying the source of the genome files, with the following columns:
@@ -24,21 +26,24 @@ Here's some examples:
 - `dsimulans-dsim-flybase-r2.02` _Drosophila simulans_ genome from flybase, release r2.02 ([source](http://ftp.flybase.net/releases/FB2024_02/))
 
 
-## Configuration
+## Options
 
-The `config.yml` can be used to configure some of the workflow options, namely the parent output directory (the specific genome directory named as above will be created within this by the workflow). 
+The `config/options.yml` can be used to configure the workflow options:
+
+- `input`: is the path to the genome CSV sheet, as detailed above.
+- `outdir`: is the path to the output directory. Sub-directories will be created within this, as detailed above. 
 
 
 ## Running the workflow
 
-The workflow can be run with the following command:
+On CSD3, the workflow can be run with the following command:
 
 ```bash
 snakemake --workflow-profile csd3 --singularity-args "--bind $PWD"
 ```
 
 - The `--workflow-profile csd3` option makes snakemake look at the `csd3/config.yaml` file and takes resource specification from there. This is set to use SLURM and sets default resources for each rule of the workflow.
-  - Make sure to edit this config file with your CSD3 account
+  - Make sure to edit this config file if using a different CSD3 account.
 - On Cambridge CSD3 we recommend running this from a `tmux`/`screen` session on a login node. Snakemake should then submit jobs to SLURM automatically.
 
 For a **dry-run** (i.e. indicate which steps would be run without actually doing anything) do:
@@ -67,7 +72,10 @@ Within each genome directory, the following files can be found:
 
 And the following directories, containing index files for the respective software tools:
 
-- `salmon`
-- `star`
 - `bowtie2`
 - `bwa`
+- `bwa-mem2`
+- `bwa-meme`
+- `hisat2`
+- `salmon`
+- `star`
