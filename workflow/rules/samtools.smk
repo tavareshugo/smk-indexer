@@ -2,7 +2,7 @@ rule samtools_index:
     input:
         "{genomedir}/genome.fa.gz",
     output:
-        "{genomedir}/genome.fa.fai",
+        "{genomedir}/genome.fa.gz.fai",
     log:
         "{genomedir}/logs/samtools.log",
     params:
