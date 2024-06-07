@@ -26,16 +26,20 @@ latency-wait: 20
 set-resources:
     samtools_index:
         runtime: 360
-        cpus_per_task: 24
+        cpus_per_task: 16
+    create_dict:
+        runtime: 120
+        cpus_per_task: 16
+        mem_mb: 32000 # we set this for Picard -Xmx memory setting
     gffread:
         runtime: 360
-        cpus_per_task: 24
+        cpus_per_task: 16
     bwa_index:
         runtime: 360
-        cpus_per_task: 24
+        cpus_per_task: 16
     bowtie2_build:
         runtime: 360
-        cpus_per_task: 24
+        cpus_per_task: 16
     star_index:
         runtime: 360
         cpus_per_task: 48
@@ -44,13 +48,13 @@ set-resources:
         cpus_per_task: 4
     salmon_index:
         runtime: 360
-        cpus_per_task: 24
+        cpus_per_task: 16
     hisat2_index:
         runtime: 360
-        cpus_per_task: 24
+        cpus_per_task: 16
     bwa_mem2_index:
         runtime: 360
-        cpus_per_task: 24
+        cpus_per_task: 16
     bwa_meme_index:
         runtime: 360
-        cpus_per_task: 24
+        cpus_per_task: 16
