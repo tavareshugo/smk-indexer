@@ -21,6 +21,7 @@ include: "rules/bowtie2.smk"
 include: "rules/star.smk"
 include: "rules/salmon.smk"
 include: "rules/hisat2.smk"
+include: "rules/bismark.smk"
 include: "rules/uncompress.smk"
 
 rule all:

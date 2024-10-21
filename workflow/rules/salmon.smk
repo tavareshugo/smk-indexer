@@ -35,6 +35,7 @@ rule salmon_index:
             "seq.bin",
             "versionInfo.json",
         ),
+    group: "salmon"
     log:
         "{genomedir}/logs/salmon_index.log",
     threads: 24
@@ -43,3 +44,16 @@ rule salmon_index:
         extra="",
     wrapper:
         "v3.10.2/bio/salmon/index"
+
+rule tx2gene:
+    input: 
+        "{genomedir}/annotation.gff3.gz"
+    output:
+        "{genomedir}/tx2gene.csv"
+    log:
+        "{genomedir}/logs/tx2gene.log"
+    conda:
+        "../envs/genomicfeatures.yaml"
+    threads: 4
+    script:
+        "../scripts/tx2gene.R"

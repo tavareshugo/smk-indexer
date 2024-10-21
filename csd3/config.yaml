@@ -58,3 +58,9 @@ set-resources:
     bwa_meme_index:
         runtime: 360
         cpus_per_task: 16
+    bismark_genome_preparation_fa_gz:
+        runtime: 360
+        cpus_per_task: 16
+    tx2gene:
+        runtime: 120
+        cpus_per_task: 8
