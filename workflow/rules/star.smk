@@ -11,4 +11,4 @@ rule star_index:
     log:
         "{genomedir}/logs/star_index.log",
     wrapper:
-        "v3.10.2/bio/star/index"
+        "v7.1.0/bio/star/index"

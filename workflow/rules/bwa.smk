@@ -1,26 +1,28 @@
-rule bwa_index:
+rule bwa_mem_index:
     input:
         "{genomedir}/genome.fa.gz",
     output:
-        idx=multiext("{genomedir}/bwa/genome", ".amb", ".ann", ".bwt", ".pac", ".sa"),
+        multiext("{genomedir}/bwa-mem/genome", ".amb", ".ann", ".bwt", ".pac", ".sa"),
     log:
-        "{genomedir}/logs/bwa_index.log",
+        "{genomedir}/logs/bwa-mem_index.log",
     threads: 24
     params:
-        extra="",
+        bwa="bwa-mem",
     wrapper:
-        "v3.10.2/bio/bwa/index"
+        "v7.1.0/bio/bwa-memx/index"
 
 rule bwa_mem2_index:
     input:
         "{genomedir}/genome.fa.gz",
     output:
-        idx=multiext("{genomedir}/bwa-mem2/genome", ".0123", ".amb", ".ann", ".bwt.2bit.64", ".pac"),
+        multiext("{genomedir}/bwa-mem2/genome", ".0123", ".amb", ".ann", ".bwt.2bit.64", ".pac"),
     log:
         "{genomedir}/logs/bwa-mem2_index.log",
     threads: 24
+    params:
+        bwa="bwa-mem2",
     wrapper:
-        "v3.11.0/bio/bwa-mem2/index"
+        "v7.1.0/bio/bwa-memx/index"
 
 rule bwa_meme_index:
     input:
@@ -41,5 +43,7 @@ rule bwa_meme_index:
     log:
         "{genomedir}/logs/bwa-meme_index.log",
     threads: 24
+    params:
+        bwa="bwa-meme"
     wrapper:
-        "v3.11.0/bio/bwa-meme/index"
+        "v7.1.0/bio/bwa-memx/index"
