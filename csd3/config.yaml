@@ -3,10 +3,10 @@
 # CSD3 default resources (comment/uncomment as preferred)
 default-resources:
     slurm_account: a-downie-sl3-cpu
-    # slurm_partition: icelake
-    # mem_mb_per_cpu: 3370
-    slurm_partition: sapphire
-    mem_mb_per_cpu: 4580
+    slurm_partition: icelake
+    mem_mb_per_cpu: 3370
+    # slurm_partition: sapphire
+    # mem_mb_per_cpu: 4580
 
 # container settings
 use-singularity: True
@@ -64,3 +64,6 @@ set-resources:
     tx2gene:
         runtime: 120
         cpus_per_task: 8
+    minimap2_index:
+        runtime: 120
+        cpus_per_task: 16
