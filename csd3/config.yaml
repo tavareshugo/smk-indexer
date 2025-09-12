@@ -34,7 +34,7 @@ set-resources:
     gffread:
         runtime: 360
         cpus_per_task: 16
-    bwa_index:
+    bwa_mem_index:
         runtime: 360
         cpus_per_task: 16
     bowtie2_build:
@@ -54,7 +54,7 @@ set-resources:
         cpus_per_task: 16
     bwa_mem2_index:
         runtime: 360
-        cpus_per_task: 16
+        cpus_per_task: 20
     bwa_meme_index:
         runtime: 360
         cpus_per_task: 16

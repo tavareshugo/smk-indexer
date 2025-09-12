@@ -5,6 +5,7 @@ rule gffread:
         annotation="{genomedir}/tmp-gffread-annotation.gtf",
     output:
         records=temp("{genomedir}/transcripts.fa"),
+        index=temp("{genomedir}/tmp-gffread-genome.fa.fai")
     group: "gffread"
     log:
         "{genomedir}/logs/gffread.log",

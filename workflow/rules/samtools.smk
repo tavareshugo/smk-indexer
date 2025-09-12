@@ -16,7 +16,7 @@ rule create_dict:
     input:
         "{genomedir}/genome.fa.gz",
     output:
-        "{genomedir}/genome.fa.gz.dict",
+        "{genomedir}/genome.dict",
     log:
         "{genomedir}/logs/create_dict.log",
     params:
@@ -27,4 +27,4 @@ rule create_dict:
     # https://snakemake.readthedocs.io/en/latest/executing/cluster.html#job-properties
     threads: 12
     wrapper:
-        "v3.11.0/bio/picard/createsequencedictionary"
+        "v7.2.0/bio/picard/createsequencedictionary"

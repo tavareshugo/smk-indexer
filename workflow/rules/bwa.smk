@@ -7,9 +7,9 @@ rule bwa_mem_index:
         "{genomedir}/logs/bwa-mem_index.log",
     threads: 24
     params:
-        bwa="bwa-mem",
+        extra="",
     wrapper:
-        "v7.1.0/bio/bwa-memx/index"
+        "v7.1.0/bio/bwa/index"
 
 rule bwa_mem2_index:
     input:
@@ -19,10 +19,8 @@ rule bwa_mem2_index:
     log:
         "{genomedir}/logs/bwa-mem2_index.log",
     threads: 24
-    params:
-        bwa="bwa-mem2",
     wrapper:
-        "v7.1.0/bio/bwa-memx/index"
+        "v7.1.0/bio/bwa-mem2/index"
 
 rule bwa_meme_index:
     input:
