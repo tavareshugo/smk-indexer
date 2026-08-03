@@ -3,7 +3,7 @@
 # https://snakemake.readthedocs.io/en/stable/snakefiles/best_practices.html,
 # in particular regarding the standardized folder structure mentioned there. 
 
-localrules: all, download
+localrules: all, download, nfcore_config
 
 configfile: "config/options.yaml"
 
@@ -23,5 +23,6 @@ include: "rules/salmon.smk"
 include: "rules/hisat2.smk"
 include: "rules/bismark.smk"
 include: "rules/minimap2.smk"
+include: "rules/nfcore_config.smk"
 rule all:
     input: final_outputs # defined in common.smk
