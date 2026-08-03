@@ -5,6 +5,7 @@ default-resources:
     slurm_account: a-downie-sl3-cpu
     slurm_partition: icelake
     mem_mb_per_cpu: 3370
+    cpus_per_task: 1
     # slurm_partition: sapphire
     # mem_mb_per_cpu: 4580
 
@@ -14,13 +15,16 @@ use-conda: True
 
 # SLURM execution
 executor: slurm
-jobs: 100                        # restrict number of submitted jobs to 100
-max-jobs-per-second: 1           # don't abuse SLURM
-max-status-checks-per-second: 1  # don't abuse SLURM
-keep-going: True                 # if a job fails, continue the pipeline for other jobs
-rerun-incomplete: True
-printshellcmds: True             # print shell commands that are run
-latency-wait: 20
+cores: 256                              # global maximum CPUs
+jobs: 100                               # maximum number of concurrent jobs
+max-jobs-per-timespan: "10/1s"          # submit max 10 jobs per second
+seconds-between-status-checks: 300      # check the queue every 5 minutes
+retries: 1                              # retry failed jobs once
+keep-going: True                        # if a job fails, continue the pipeline for other jobs
+rerun-incomplete: True                  # incomplete jobs run again
+printshellcmds: True                    # print shell commands that are run
+latency-wait: 30                        # wait 30s for files to be written to disk
+local-cores: 2                          # at most 2 CPUs for local jobs
 
 # resources for each rule
 set-resources:
