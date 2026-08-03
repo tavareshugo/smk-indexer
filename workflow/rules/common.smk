@@ -4,7 +4,7 @@ import os
 genomes = pd.read_csv(config["input"], sep=",").set_index(["name"], drop=False)
 
 def final_outputs(wildcards):
-    basenames = ["genome.fa.gz", "genome.fa.gz.fai", "genome.dict", "annotation.gff3.gz", "annotation.gtf.gz", "transcripts.fa.gz", "tx2gene.csv"]
+    basenames = ["genome.fa", "genome.fa.fai", "genome.dict", "annotation.gff3", "annotation.gtf", "transcripts.fa", "tx2gene.csv"]
     basenames.extend(["star", "minimap2/genome.mmi", "bismark/Bisulfite_Genome"])
     basenames.extend(multiext("hisat2/genome", ".1.ht2l", ".2.ht2l", ".3.ht2l", ".4.ht2l", ".5.ht2l", ".6.ht2l", ".7.ht2l", ".8.ht2l",))
     basenames.extend(multiext("bowtie2/genome", ".1.bt2", ".2.bt2", ".3.bt2", ".4.bt2", ".rev.1.bt2", ".rev.2.bt2"))

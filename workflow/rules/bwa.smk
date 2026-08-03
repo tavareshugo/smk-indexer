@@ -1,6 +1,6 @@
 rule bwa_mem_index:
     input:
-        "{genomedir}/genome.fa.gz",
+        "{genomedir}/genome.fa",
     output:
         multiext("{genomedir}/bwa-mem/genome", ".amb", ".ann", ".bwt", ".pac", ".sa"),
     log:
@@ -13,7 +13,7 @@ rule bwa_mem_index:
 
 rule bwa_mem2_index:
     input:
-        "{genomedir}/genome.fa.gz",
+        "{genomedir}/genome.fa",
     output:
         multiext("{genomedir}/bwa-mem2/genome", ".0123", ".amb", ".ann", ".bwt.2bit.64", ".pac"),
     log:
@@ -24,7 +24,7 @@ rule bwa_mem2_index:
 
 rule bwa_meme_index:
     input:
-        "{genomedir}/genome.fa.gz",
+        "{genomedir}/genome.fa",
     output:
         multiext(
             "{genomedir}/bwa-meme/genome",

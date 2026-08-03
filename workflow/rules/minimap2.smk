@@ -1,6 +1,6 @@
 rule minimap2_index:
     input:
-        target="{genomedir}/tmp-minimap2-genome.fa"
+        target="{genomedir}/genome.fa"
     output:
         "{genomedir}/minimap2/genome.mmi"
     log:

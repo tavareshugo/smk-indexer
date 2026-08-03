@@ -1,6 +1,6 @@
 rule hisat2_index:
     input:
-        fasta = "{genomedir}/tmp-hisat2-genome.fa"
+        fasta = "{genomedir}/genome.fa"
     output:
         multiext(
             "{genomedir}/hisat2/genome",

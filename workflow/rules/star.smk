@@ -1,8 +1,7 @@
 rule star_index:
     input:
-        # we use uncompressed files - see uncompress.smk
-        fasta="{genomedir}/tmp-star-genome.fa",
-        gft="{genomedir}/tmp-star-annotation.gtf"
+        fasta="{genomedir}/genome.fa",
+        gft="{genomedir}/annotation.gtf"
     output:
         directory("{genomedir}/star"),
     threads: 48

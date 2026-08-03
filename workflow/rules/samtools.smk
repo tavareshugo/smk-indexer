@@ -1,9 +1,8 @@
 rule samtools_index:
     input:
-        "{genomedir}/genome.fa.gz",
+        "{genomedir}/genome.fa",
     output:
-        "{genomedir}/genome.fa.gz.fai",
-        "{genomedir}/genome.fa.gz.gzi",
+        "{genomedir}/genome.fa.fai",
     log:
         "{genomedir}/logs/samtools.log",
     params:
@@ -14,7 +13,7 @@ rule samtools_index:
 
 rule create_dict:
     input:
-        "{genomedir}/genome.fa.gz",
+        "{genomedir}/genome.fa",
     output:
         "{genomedir}/genome.dict",
     log:

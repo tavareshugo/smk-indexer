@@ -1,6 +1,6 @@
 rule bowtie2_build:
     input:
-        ref="{genomedir}/genome.fa.gz",
+        ref="{genomedir}/genome.fa",
     output:
         multiext(
             "{genomedir}/bowtie2/genome",

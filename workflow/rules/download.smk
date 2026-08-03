@@ -1,8 +1,8 @@
 rule download:
     output:
-        genome="{outdir}/{genome}/genome.fa.gz",
-        gff="{outdir}/{genome}/annotation.gff3.gz",
-        gtf="{outdir}/{genome}/annotation.gtf.gz",
+        genome="{outdir}/{genome}/genome.fa",
+        gff="{outdir}/{genome}/annotation.gff3",
+        gtf="{outdir}/{genome}/annotation.gtf",
     log:
         "{outdir}/{genome}/logs/download.log",
     conda:
@@ -16,12 +16,13 @@ rule download:
         gtf=$(grep "{wildcards.genome}" {config[input]} | cut -d, -f3)
         gff=$(grep "{wildcards.genome}" {config[input]} | cut -d, -f4)
 
-        # download genome and recompress with samtools bgzip
+        # download genome and decompress
         wget -O {wildcards.outdir}/{wildcards.genome}/genome.fa.gz $genome > {log} 2>&1
         gunzip {wildcards.outdir}/{wildcards.genome}/genome.fa.gz 2>> {log}
-        bgzip {wildcards.outdir}/{wildcards.genome}/genome.fa 2>> {log}
 
-        # download annotations
+        # download annotations and decompress
         wget -O {wildcards.outdir}/{wildcards.genome}/annotation.gtf.gz $gtf >> {log} 2>&1
+        gunzip {wildcards.outdir}/{wildcards.genome}/annotation.gtf.gz 2>> {log}
         wget -O {wildcards.outdir}/{wildcards.genome}/annotation.gff3.gz $gff >> {log} 2>&1
+        gunzip {wildcards.outdir}/{wildcards.genome}/annotation.gff3.gz 2>> {log}
         """

@@ -1,9 +1,9 @@
 rule salmon_decoy:
     input:
-        transcriptome="{genomedir}/transcripts.fa.gz",
-        genome="{genomedir}/genome.fa.gz",
+        transcriptome="{genomedir}/transcripts.fa",
+        genome="{genomedir}/genome.fa",
     output:
-        gentrome="{genomedir}/salmon/gentrome.fa.gz",
+        gentrome=temp("{genomedir}/salmon/gentrome.fa"),
         decoys="{genomedir}/salmon/decoys.txt",
     group: "salmon"
     threads: 2
@@ -14,7 +14,7 @@ rule salmon_decoy:
 
 rule salmon_index:
     input:
-        sequences="{genomedir}/salmon/gentrome.fa.gz",
+        sequences="{genomedir}/salmon/gentrome.fa",
         decoys="{genomedir}/salmon/decoys.txt"
     output:
         multiext(
@@ -47,7 +47,7 @@ rule salmon_index:
 
 rule tx2gene:
     input: 
-        "{genomedir}/annotation.gff3.gz"
+        "{genomedir}/annotation.gff3"
     output:
         "{genomedir}/tx2gene.csv"
     log:
