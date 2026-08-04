@@ -6,15 +6,15 @@ ruleorder: bismark_prep_files > download
 rule bismark_prep_files:
     input:
         "{genomedir}/genome.fa",
-    output: 
+    output:
         "{genomedir}/bismark/genome.fa"
     group: "bismark"
-    log: 
+    log:
         "{genomedir}/logs/bismark_prep_files.log"
     shell:
         """
-        mkdir -p {wildcards.genomedir}/bismark
-        ln -s ../genome.fa {output}
+        mkdir -p $(basename {output})
+        ln -s {input} {output}
         """
 
 rule bismark_genome_preparation:
