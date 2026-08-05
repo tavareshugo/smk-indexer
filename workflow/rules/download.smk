@@ -5,8 +5,6 @@ rule download:
         gtf=OUTDIR + "/{genome}/annotation.gtf",
     log:
         OUTDIR + "/{genome}/logs/download.log",
-    conda:
-        "../envs/samtools.yaml"
     shell:
         """
         genomedir=$(dirname {output.genome})
