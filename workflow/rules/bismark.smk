@@ -2,7 +2,7 @@ rule bismark_genome_preparation:
     input:
         genome="{genomedir}/genome.fa",
     output:
-        bismark_genome_dir=directory("{genomedir}/bismark/Bisulfite_Genome"),
+        bismark_genome_dir=directory("{genomedir}/bismark/"),
     log:
         "{genomedir}/logs/bismark_genome_preparation.log",
     threads: 16  # threads of at least 2 needs to be specified for this rule

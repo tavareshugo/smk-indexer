@@ -10,7 +10,7 @@ rule nfcore_config:
         tx2gene=expand(OUTDIR + "/{genome}/tx2gene.csv", genome=genomes.index),
         star=expand(OUTDIR + "/{genome}/star", genome=genomes.index),
         minimap2=expand(OUTDIR + "/{genome}/minimap2/genome.mmi", genome=genomes.index),
-        bismark=expand(OUTDIR + "/{genome}/bismark/Bisulfite_Genome", genome=genomes.index),
+        bismark=expand(OUTDIR + "/{genome}/bismark/", genome=genomes.index),
         hisat2=expand(OUTDIR + "/{genome}/hisat2/genome.1.ht2l", genome=genomes.index),
         bowtie2=expand(OUTDIR + "/{genome}/bowtie2/genome.1.bt2", genome=genomes.index),
         bwa=expand(OUTDIR + "/{genome}/bwa-mem/genome.amb", genome=genomes.index),
