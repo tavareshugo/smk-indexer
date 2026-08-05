@@ -1,31 +1,12 @@
-# we create a separate folder with a symlink to the FASTA
-# as Bismark is not very flexible and will use any FASTA files in the directory
-# this way we avoid indexing transcripts and other files
-# the ruleorder is needed because of wildcard ambiguity with the `download` rule
-ruleorder: bismark_prep_files > download
-rule bismark_prep_files:
-    input:
-        "{genomedir}/genome.fa",
-    output:
-        "{genomedir}/bismark/genome.fa"
-    group: "bismark"
-    log:
-        "{genomedir}/logs/bismark_prep_files.log"
-    shell:
-        """
-        mkdir -p $(basename {output})
-        ln -s {input} {output}
-        """
-
 rule bismark_genome_preparation:
     input:
-        "{genomedir}/bismark/genome.fa"
+        genome="{genomedir}/genome.fa",
     output:
-        directory("{genomedir}/bismark/Bisulfite_Genome")
-    group: "bismark"
+        bismark_genome_dir=directory("{genomedir}/bismark/Bisulfite_Genome"),
     log:
         "{genomedir}/logs/bismark_genome_preparation.log",
+    threads: 16  # threads of at least 2 needs to be specified for this rule
     params:
-        extra=""  # optional params string
+        extra="",  # optional params string
     wrapper:
-        "v4.7.2/bio/bismark/bismark_genome_preparation"
+        "v9.15.0/bio/bismark/bismark_genome_preparation"
