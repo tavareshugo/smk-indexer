@@ -16,6 +16,7 @@ rule nfcore_config:
         bwa=expand(OUTDIR + "/{genome}/bwa-mem/genome.amb", genome=genomes.index),
         bwamem2=expand(OUTDIR + "/{genome}/bwa-mem2/genome.0123", genome=genomes.index),
         salmon=expand(OUTDIR + "/{genome}/salmon/info.json", genome=genomes.index),
+        cellranger=expand(OUTDIR + "/{genome}/cellranger", genome=genomes.index),
     output:
         OUTDIR + "/nfcore_genomes.config",
     run:
@@ -71,5 +72,6 @@ rule nfcore_config:
                 fh.write(f"            minimap2_index   = \"{gdir}/minimap2/genome.mmi\"\n")
                 fh.write(f"            salmon           = \"{gdir}/salmon/\"\n")
                 fh.write(f"            salmon_index     = \"{gdir}/salmon/\"\n")
+                fh.write(f"            cellranger_index = \"{gdir}/cellranger/\"\n")
                 fh.write(f"        }}\n")
             fh.write("    }\n}\n")

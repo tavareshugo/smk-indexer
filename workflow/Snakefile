@@ -23,6 +23,7 @@ include: "rules/salmon.smk"
 include: "rules/hisat2.smk"
 include: "rules/bismark.smk"
 include: "rules/minimap2.smk"
+include: "rules/cellranger.smk"
 include: "rules/nfcore_config.smk"
 rule all:
     input: final_outputs # defined in common.smk

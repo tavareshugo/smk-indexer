@@ -5,7 +5,6 @@ default-resources:
     slurm_account: a-downie-sl3-cpu
     slurm_partition: icelake
     mem_mb_per_cpu: 3370
-    cpus_per_task: 1
     # slurm_partition: sapphire
     # mem_mb_per_cpu: 4580
 
@@ -71,3 +70,7 @@ set-resources:
     minimap2_index:
         runtime: 120
         cpus_per_task: 16
+    cellranger_mkref:
+        runtime: 360
+        cpus_per_task: 16
+        mem_mb: 50000
